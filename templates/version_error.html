@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyBlog - Version Conflict!</title>
+</head>
+<body>
+    <h1>Version Conflict!</h1>
+    <div>
+        <p><i>Server version: {{ serverversion }}</i></p>
+        <p><b>Title:</b></p>
+        <p>{{ servertitle }}</p>
+        <p><b>Content:</b></p>
+        <p>{{ servercontent }}</p>
+    </div>
+    <hr>
+    <form action="/editblog/{{ id }}/" method="post">
+        {% csrf_token %}
+        <p><i>Your version: {{ clientversion }}</i></p>
+        <p><b>Title:</b></p>
+        <textarea name="title" rows=1 cols=30>{{ clienttitle }}</textarea>
+        <p><b>Content:</b></p>
+        <textarea name="content" rows=30 cols=80>{{ clientcontent }}</textarea>
+        <input type="hidden" name="version" value="{{ serverversion }}">
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

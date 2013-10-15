@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyBlog - {{ title }} [Edit]</title>
+</head>
+<body>
+    <form action="/editblog/{{ id }}/" method="post">
+        {% csrf_token %}
+        <i>rev {{ version }}</i>
+        <p><b>Title:</b></p>
+        <textarea name="title" rows=1 cols=30>{{ title }}</textarea>
+        <p><b>Content:</b></p>
+        <textarea name="content" rows=30 cols=80>{{ content }}</textarea>
+        <input type="hidden" name="version" value="{{ version }}">
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

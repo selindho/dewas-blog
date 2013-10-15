@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyBlog - Home</title>
+</head>
+<body>
+
+<h1>MyBlog - Home</h1>
+
+<form action="/addblog/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Create">
+</form>
+
+<div id="content"></div>
+
+{% for post in posts %}
+
+    <br><hr>
+
+    <b><a href='/myblog/{{ post.id }}/'>{{ post.title }}</a></b>
+    <br>
+    <i>{{ post.timestamp }} - rev {{ post.version }}</i>
+    <p>{{ post.content }}</p>
+
+    <form action="/editblog/{{ post.id }}/" method='post'>
+        {% csrf_token %}
+        <input type=hidden name='version' value='{{ post.version }}'>
+        <input type=submit value='Edit'>
+    </form>
+
+    <form action="/deleteblog/{{ post.id }}/" method='post'>
+        {% csrf_token %}
+        <input type=submit value='Delete'>
+    </form>
+
+    <hr><br>
+
+{% endfor %}
+
+<div id="stats">
+    <p>
+        <b>Session started: </b> {{ stats.start }} <br>
+        <b>Visited: </b> {{ stats.visited }} <br>
+        <b>Edited: </b> {{ stats.edited }} <br>
+        <b>Created: </b> {{ stats.created }} <br>
+        <b>Deleted: </b> {{ stats.deleted }}
+    </p>
+    <form action="/resetstats/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Reset">
+    </form>
+</div>
+
+</body>
+</html>
