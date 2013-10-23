@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'BlogApp',
+    'autofixture',
+    'rest_framework'
 )
 
 # A sample logging configuration. The only tangible logging

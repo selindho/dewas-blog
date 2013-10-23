@@ -131,7 +131,7 @@ def auth(request):
                 if user.is_active:
                     login(request, user)
                     return render_to_response('message.html', {'message': 'Login successful!',
-                                                               'redirect': request.POST['next']},
+                                                               'redirect': '/myblog/'},
                                               context_instance=RequestContext(request))
                 else:
                     return render_to_response('message.html', {'message': 'Account suspended!', 'redirect': '/myblog/'},
