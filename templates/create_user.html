@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyBlog - {{ title }} [Edit]</title>
+</head>
+<body>
+    <form action="/createuser/" method="post">
+        {% csrf_token %}
+        <p><b>Username:</b></p>
+        <textarea name="user" rows=1 cols=30></textarea>
+        <p><b>Password:</b></p>
+        <textarea name="password" rows=1 cols=80></textarea>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>

@@ -3,8 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import get_template
 from django.template import Context, RequestContext
 from django.shortcuts import render_to_response
-from models import *
+from BlogApp.models import *
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 def show_home(request):
@@ -77,7 +78,8 @@ def add_blog(request):
     post = BlogPost(title='Untitled Post', content='', timestamp=datetime.now())
     post.save()
     request.session['created'] = int(request.session['created']) + 1
-    return render_to_response('add_blog_temp.html', context_instance=RequestContext(request))
+    return render_to_response('message.html', {'message': 'Blog added successfully!', 'redirect': '/myblog/'},
+                              context_instance=RequestContext(request))
 
 
 def delete_blog(request, id):
@@ -97,3 +99,17 @@ def reset_stats(request):
     request.session['valid'] = 'False'
 
     return HttpResponseRedirect('/myblog/')
+
+
+def create_user(request):
+    if request.method == 'POST' and 'user' in request.POST and 'password' in request.POST:
+        try:
+            User.objects.create_user(username=request.POST['user'], password=request.POST['password'], email=None)
+            return render_to_response('message.html', {'message': 'User created!', 'redirect': '/myblog/'},
+                                      context_instance=RequestContext(request))
+        except:
+            return render_to_response('message.html', {'message': 'User exists!', 'redirect': '/createuser/'},
+                                      context_instance=RequestContext(request))
+    else:
+        return render_to_response('create_user.html', {'title': 'Create User'},
+                                  context_instance=RequestContext(request))
