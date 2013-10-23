@@ -9,7 +9,17 @@
 
 <form action="/addblog/" method="post">
     {% csrf_token %}
-    <input type="submit" value="Create">
+    <input type="submit" value="Create blog">
+</form>
+
+<form action="/createuser/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Create user">
+</form>
+
+<form action="/{{ action }}/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="{{ label }}">
 </form>
 
 <div id="content"></div>

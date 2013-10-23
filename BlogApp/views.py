@@ -11,6 +11,13 @@ from django.contrib.auth.models import User
 def show_home(request):
     posts = BlogPost.getAll()
 
+    if request.user.is_authenticated() and request.user.is_active():
+        action = '/logout/'
+        label = 'Logout'
+    else:
+        action = '/login/'
+        label = 'Login'
+
     if 'valid' not in request.session or request.session['valid'] != 'True':
         request.session['valid'] = 'True'
         request.session['start'] = datetime.now()
@@ -25,7 +32,8 @@ def show_home(request):
               'created': request.session['created'],
               'deleted': request.session['deleted']}
 
-    return render_to_response("home_temp.html", {'posts': posts, 'stats': params}, context_instance=RequestContext(request))
+    return render_to_response("home_temp.html", {'action': action, 'label': label, 'posts': posts, 'stats': params},
+                              context_instance=RequestContext(request))
 
 
 def edit_blog(request, id):
@@ -91,7 +99,7 @@ def delete_blog(request, id):
     else:
         post.delete()
         request.session['deleted'] = int(request.session['deleted']) + 1
-        return render_to_response('delete_blog_temp.html', {'title': post.title},
+        return render_to_response('message.html', {'message': 'Successfully deleted blog!', 'redirect': '/myblog/'},
                                   context_instance=RequestContext(request))
 
 
@@ -104,7 +112,7 @@ def reset_stats(request):
 def create_user(request):
     if request.method == 'POST' and 'user' in request.POST and 'password' in request.POST:
         try:
-            User.objects.create_user(username=request.POST['user'], password=request.POST['password'], email=None)
+            user = User.objects.create_user(username=request.POST['user'], password=request.POST['password'], email=None)
             return render_to_response('message.html', {'message': 'User created!', 'redirect': '/myblog/'},
                                       context_instance=RequestContext(request))
         except:

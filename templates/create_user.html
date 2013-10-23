@@ -7,9 +7,10 @@
     <form action="/createuser/" method="post">
         {% csrf_token %}
         <p><b>Username:</b></p>
-        <textarea name="user" rows=1 cols=30></textarea>
+        <input type="text" name="user" size="30">
         <p><b>Password:</b></p>
-        <textarea name="password" rows=1 cols=80></textarea>
+        <input type="password" name="password" size="30">
+        <br>
         <input type="submit" value="Create">
     </form>
 </body>

@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^deleteblog/(?P<id>\d+)/$', delete_blog),
     url(r'^resetstats/$', reset_stats),
     url(r'^createuser/$', create_user),
+    #url(r'^login/$', login),
+    #url(r'^logout/$', logout),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
