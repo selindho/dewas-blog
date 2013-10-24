@@ -17,7 +17,8 @@ class JSONResponse(HttpResponse):
         super(JSONResponse, self).__init__(content, **kwargs)
 
 
-# TODO: REST-API
+# TODO: REST-API serializer not functional
+# Basic authorization header
 # Sample JSON request:
 #   {
 #   "fields":
@@ -34,7 +35,7 @@ def blogs(request):
         auth = request.META['HTTP_AUTHORIZATION'].partition(' ')
         clear_text = base64.b64decode(auth[2])
         split = str(clear_text, 'UTF-8').partition(':')
-        user = authenticate(split[0], split[2])
+        user = authenticate(username=split[0], password=split[2])
 
     if user is not None and user.is_active:
         if request.method == 'POST':
@@ -43,7 +44,6 @@ def blogs(request):
             serializer = BlogPostSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-                print(serializer.data)
                 return JSONResponse(serializer.data)
             else:
                 return JSONResponse(serializer.errors, status=400)
