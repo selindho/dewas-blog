@@ -3,6 +3,7 @@ from BlogApp.views import *
 from django.views.decorators.csrf import csrf_exempt
 from BlogApp.rest_views import *
 
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()

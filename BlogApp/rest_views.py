@@ -37,15 +37,15 @@ def blogs(request):
         split = str(clear_text, 'UTF-8').partition(':')
         user = authenticate(username=split[0], password=split[2])
 
-    if user is not None and user.is_active:
-        if request.method == 'POST':
-            data = JSONParser().parse(request)
-            print(data)
-            serializer = BlogPostSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                return JSONResponse(serializer.data)
-            else:
-                return JSONResponse(serializer.errors, status=400)
+        if user is not None and user.is_active:
+            if request.method == 'PUT':
+                data = JSONParser().parse(request)
+                print(data)
+                serializer = BlogPostSerializer(data=data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return JSONResponse(serializer.data)
+                else:
+                    return JSONResponse(serializer.errors, status=400)
     else:
         return HttpResponse(status=401)
