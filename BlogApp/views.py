@@ -35,7 +35,6 @@ def show_home(request):
 @login_required
 def edit_blog(request, id):
     post = BlogPost.getById(id)
-
     if post is None:
         return HttpResponse("Not found!")
 

@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from BlogApp.views import *
+from django.views.decorators.csrf import csrf_exempt
+from BlogApp.rest_views import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -18,6 +20,9 @@ urlpatterns = patterns('',
     url(r'^createuser/$', create_user),
     url(r'^login/$', auth),
     url(r'^logout/$', leave),
+
+    # REST api
+    url(r'^api/v1/blogs/$', blogs),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

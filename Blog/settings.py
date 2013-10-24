@@ -104,6 +104,8 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+FIXTURES_DIR = ('fixtures')
+
 ROOT_URLCONF = 'Blog.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
