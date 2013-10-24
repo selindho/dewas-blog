@@ -7,10 +7,28 @@
 
 <h1>MyBlog - Home</h1>
 
-<form action="/addblog/" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Create">
-</form>
+    {% if isLoggedIn %}
+    <form action="/addblog/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Create blog">
+    </form>
+    <form action="/logout/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+    {% else %}
+    <form action="/createuser/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Create user">
+    </form>
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Login">
+    </form>
+
+    {% endif %}
+
 
 <div id="content"></div>
 

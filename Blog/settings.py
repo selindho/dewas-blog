@@ -21,6 +21,8 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = '/login/'
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -102,6 +104,8 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+FIXTURES_DIR = ('fixtures')
+
 ROOT_URLCONF = 'Blog.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -122,6 +126,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'BlogApp',
+    'autofixture',
+    'rest_framework'
 )
 
 # A sample logging configuration. The only tangible logging
